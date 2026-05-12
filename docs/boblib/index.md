@@ -1,6 +1,9 @@
 ---
 layout: doc
 title: BobLib
+next:
+  text: 'Reference'
+  link: '/reference/'
 ---
 
 # BobLib

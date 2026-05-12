@@ -1,3 +1,8 @@
+---
+layout: doc
+title: Contributing
+---
+
 # Contributing to BobDocs
 
 BobDocs uses **VitePress**, which turns simple text files (Markdown) into the website you see online.
@@ -87,10 +92,9 @@ Most of the work happens in the `docs/` folder. Files end in `.md` (Markdown).
 
 ### 3. Add to the Navigation (If needed)
 
-If you created a *new* file, you might need to add it to the top menu or the sidebar so people can find it.
+If you created a *new* file, add a single entry to `docs/.vitepress/config.ts` — just a page title and URL path. The `##` section headings in your file are picked up automatically; you don't need to list them manually.
 
-* Open `docs/.vitepress/config.ts`.
-* Look for `nav` (top bar) or `sidebar` (left side) and add your link there. Just follow the pattern of the existing lines!
+If you're editing an *existing* file, renaming or adding `##` headings is all you need — the sidebar updates on the next build with no config change required.
 
 ### 4. Check for Errors
 

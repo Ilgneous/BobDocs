@@ -27,3 +27,5 @@ docs/.vitepress/dist
 *.njsproj
 *.sln
 *.sw?
+
+*.claude/

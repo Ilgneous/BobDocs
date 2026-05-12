@@ -1,6 +1,9 @@
 ---
 layout: doc
 title: Use Guide
+prev:
+  text: 'Startup Guide'
+  link: '/startup-guide/'
 ---
 
 # Use Guide
