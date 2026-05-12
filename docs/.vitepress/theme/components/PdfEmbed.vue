@@ -14,7 +14,6 @@
 
 <script setup lang="ts">
 import { onBeforeUnmount, onMounted, ref, watch } from 'vue'
-import pdfWorkerUrl from 'pdfjs-dist/build/pdf.worker.min.mjs?url'
 
 const props = defineProps<{ src: string }>()
 
@@ -38,10 +37,8 @@ async function render() {
     pageCount.value = 0
 
     try {
-        const { getDocument, GlobalWorkerOptions } = await import('pdfjs-dist')
-        if (!GlobalWorkerOptions.workerSrc) {
-            GlobalWorkerOptions.workerSrc = pdfWorkerUrl
-        }
+        const { getDocument, GlobalWorkerOptions, version } = await import('pdfjs-dist')
+        GlobalWorkerOptions.workerSrc = `https://unpkg.com/pdfjs-dist@${version}/build/pdf.worker.min.mjs`
 
         const pdf = await getDocument({ url: props.src }).promise
         if (myToken !== token) return
@@ -69,7 +66,7 @@ async function render() {
             canvas.style.width = `${Math.floor(scale * viewport.width)}px`
             canvas.style.height = `${Math.floor(scale * viewport.height)}px`
 
-            await page.render({ canvasContext: canvas.getContext('2d')!, viewport: scaled }).promise
+            await page.render({ canvasContext: canvas.getContext('2d')!, canvas, viewport: scaled }).promise
         }
     } catch (e) {
         if (myToken !== token) return
