@@ -54,21 +54,25 @@ The result is a workflow for generating simulation ground truth that you can ins
 
 The sample outputs below come from the active BobSim workflows and live in `docs/public/` for easy embedding.
 
-<div class="desktop-visuals" style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; width: 100%;">
+<div class="desktop-visuals">
   <div>
     <video autoplay loop muted playsinline width="100%" style="display: block;">
       <source src="/steady_state_eval.mp4" type="video/mp4">
     </video>
     <div style="height: 1rem;"></div>
-    <PdfViewer src="/steady_state_eval_report.pdf" />
+    <PdfEmbed src="/steady_state_eval_report.pdf" />
   </div>
   <div>
     <video autoplay loop muted playsinline width="100%" style="display: block;">
       <source src="/transient_eval.mp4" type="video/mp4">
     </video>
     <div style="height: 1rem;"></div>
-    <PdfViewer src="/transient_eval_report.pdf" />
+    <PdfEmbed src="/transient_eval_report.pdf" />
   </div>
+</div>
+
+<div class="mobile-visuals-message">
+Sample reports are best viewed on a wider screen.
 </div>
 
 ---

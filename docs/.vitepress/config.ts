@@ -1,7 +1,45 @@
+/// <reference types="node" />
+import { readFileSync } from "fs";
+import { dirname, resolve } from "path";
+import { fileURLToPath } from "url";
 import { defineConfig } from "vitepress";
 import mathjax3 from "markdown-it-mathjax3";
 import { withMermaid } from "vitepress-plugin-mermaid";
 
+const __dirname = dirname(fileURLToPath(import.meta.url));
+const docsDir = resolve(__dirname, "..");
+
+// ---------------------------------------------------------------------------
+// Sidebar helpers
+// Reads a markdown file and returns its ## headings as anchor sub-items.
+// Matches VitePress's default slug: lowercase, strip non-word chars, spaces→hyphens.
+// ---------------------------------------------------------------------------
+function slugify(text: string): string {
+  return text
+    .toLowerCase()
+    .replace(/[^\w\s-]/g, "")
+    .trim()
+    .replace(/\s+/g, "-")
+    .replace(/-+/g, "-");
+}
+
+function h2items(relPath: string, urlBase: string) {
+  const content = readFileSync(resolve(docsDir, relPath), "utf-8");
+  return content
+    .split("\n")
+    .filter((line: string) => line.startsWith("## "))
+    .map((line: string) => line.slice(3).trim())
+    .map((text: string) => ({ text, link: `${urlBase}#${slugify(text)}` }));
+}
+
+// Build a sidebar entry: page title + its ## headings as sub-items.
+function page(title: string, urlPath: string, relFile: string) {
+  return { text: title, link: urlPath, items: h2items(relFile, urlPath) };
+}
+
+// ---------------------------------------------------------------------------
+// Config
+// ---------------------------------------------------------------------------
 export default withMermaid(
   defineConfig({
     title: "BobDyn",
@@ -9,66 +47,70 @@ export default withMermaid(
 
     cleanUrls: true,
 
+    head: [["link", { rel: "icon", href: "/bob.png" }]],
+
     markdown: {
       defaultHighlightLang: "txt",
-      languageAlias: {
-        modelica: "txt",
-      },
-      config: (md) => {
-        md.use(mathjax3);
-      },
+      languageAlias: { modelica: "txt" },
+      config: (md) => { md.use(mathjax3); },
     },
 
     themeConfig: {
       logo: "/bob.png",
       siteTitle: "BobDyn",
 
+      outline: 2,
+
       nav: [
         { text: "Startup Guide", link: "/startup-guide/" },
-        { text: "Use Guide", link: "/use-guide/" },
+        { text: "Use Guide",     link: "/use-guide/" },
         {
           text: "Documentation",
           items: [
-            { text: "BobLib", link: "/boblib/" },
-            { text: "BobSim", link: "/bobsim/" },
+            { text: "BobLib",    link: "/boblib/" },
+            { text: "BobSim",    link: "/bobsim/" },
             { text: "Reference", link: "/reference/" },
           ],
         },
+        { text: "Contributing", link: "/contributing" },
       ],
 
       sidebar: {
         "/startup-guide/": [
-          {
-            text: "Startup Guide",
-            items: [{ text: "Overview", link: "/startup-guide/" }],
-          },
+          page("Startup Guide", "/startup-guide/", "startup-guide/index.md"),
         ],
 
         "/use-guide/": [
+          page("Use Guide", "/use-guide/", "use-guide/index.md"),
+        ],
+
+        "/boblib/": [
+          page("BobLib", "/boblib/", "boblib/index.md"),
+        ],
+
+        "/bobsim/": [
           {
-            text: "Use Guide",
-            items: [{ text: "Overview", link: "/use-guide/" }],
+            text: "BobSim",
+            items: [
+              page("BobSim",                  "/bobsim/",    "bobsim/index.md"),
+              page("Design of Experiments",   "/bobsim/doe", "bobsim/doe.md"),
+            ],
           },
         ],
 
         "/reference/": [
           {
             text: "Reference",
-            collapsed: false,
             items: [
-              { text: "Overview", link: "/reference/" },
-              {
-                text: "Vehicle Dynamics",
-                collapsed: false,
-                items: [{ text: "Vehicle Performance Metrics", link: "/reference/metrics" }],
-              },
-              {
-                text: "Control Foundations",
-                collapsed: false,
-                items: [{ text: "Control Theory", link: "/reference/control-theory" }],
-              },
+              page("Reference",                  "/reference/",                "reference/index.md"),
+              page("Vehicle Performance Metrics", "/reference/metrics",        "reference/metrics.md"),
+              page("Control Theory",             "/reference/control-theory",  "reference/control-theory.md"),
             ],
           },
+        ],
+
+        "/contributing": [
+          page("Contributing", "/contributing", "contributing.md"),
         ],
       },
 
@@ -79,9 +121,7 @@ export default withMermaid(
         copyright: "Copyright © 2026 BobDyn",
       },
 
-      search: {
-        provider: "local",
-      },
+      search: { provider: "local" },
     },
   })
 );

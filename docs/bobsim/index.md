@@ -29,7 +29,7 @@ The primary public workflows are:
 
 ## What BobSim does
 
-<div style="display: flex; justify-content: center;">
+<div class="centered-diagram">
 
 ```mermaid
 flowchart TD
@@ -56,5 +56,6 @@ flowchart TD
 - [Startup Guide](/startup-guide/)
 - [Use Guide](/use-guide/)
 - [BobLib](/boblib/)
+- [Design of Experiments](/bobsim/doe)
 - [Vehicle performance metrics](/reference/metrics)
 - [Control theory](/reference/control-theory)
