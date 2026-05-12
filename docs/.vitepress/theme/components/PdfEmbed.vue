@@ -14,6 +14,7 @@
 
 <script setup lang="ts">
 import { onBeforeUnmount, onMounted, ref, watch } from 'vue'
+import pdfWorkerUrl from 'pdfjs-dist/build/pdf.worker.min.mjs?url'
 
 const props = defineProps<{ src: string }>()
 
@@ -39,8 +40,7 @@ async function render() {
     try {
         const { getDocument, GlobalWorkerOptions } = await import('pdfjs-dist')
         if (!GlobalWorkerOptions.workerSrc) {
-            const workerUrl = new URL('pdfjs-dist/build/pdf.worker.min.mjs', import.meta.url).href
-            GlobalWorkerOptions.workerSrc = workerUrl
+            GlobalWorkerOptions.workerSrc = pdfWorkerUrl
         }
 
         const pdf = await getDocument({ url: props.src }).promise
