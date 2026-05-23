@@ -1,7 +1,8 @@
 {
   "ignorePatterns": [
     { "pattern": "^http://localhost" },
-    { "pattern": "^https://localhost" }
+    { "pattern": "^https://localhost" },
+    { "pattern": "^/" }
   ],
   "retryOn429": true,
   "retryCount": 3,

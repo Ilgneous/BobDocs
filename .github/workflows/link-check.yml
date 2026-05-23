@@ -1,4 +1,4 @@
-name: Broken Link Check
+name: CI
 
 on:
   pull_request:
@@ -9,12 +9,12 @@ on:
 
 jobs:
   link-check:
-    name: Check links in docs
+    name: Broken Link Check
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
 
-      - name: Run markdown-link-check
+      - name: Check links
         uses: gaurav-nelson/github-action-markdown-link-check@v1
         with:
           folder-path: "docs"
