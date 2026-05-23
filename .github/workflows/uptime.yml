@@ -1,0 +1,20 @@
+name: Nightly Uptime Ping
+
+on:
+  schedule:
+    - cron: "0 0 * * *"
+  workflow_dispatch:
+
+jobs:
+  ping:
+    name: Ping bobdyn.com
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check site is up
+        run: |
+          STATUS=$(curl -o /dev/null -s -w "%{http_code}" --max-time 15 https://bobdyn.com)
+          echo "HTTP status: $STATUS"
+          if [ "$STATUS" -lt 200 ] || [ "$STATUS" -ge 400 ]; then
+            echo "Site returned unexpected status $STATUS"
+            exit 1
+          fi
