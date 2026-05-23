@@ -5,6 +5,9 @@ on:
     branches: [main]
   pull_request:
     branches: [main]
+  schedule:
+    - cron: "0 1 * * *"
+  workflow_dispatch:
 
 jobs:
   build:
@@ -57,3 +60,15 @@ jobs:
 
       - name: Run ESLint
         run: npm run lint:ts
+
+  link-check:
+    name: Broken Link Check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check links
+        uses: gaurav-nelson/github-action-markdown-link-check@v1
+        with:
+          folder-path: "docs"
+          config-file: ".github/mlc-config.json"
