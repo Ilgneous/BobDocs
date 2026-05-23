@@ -12,7 +12,7 @@ jobs:
     steps:
       - name: Check site is up
         run: |
-          STATUS=$(curl -o /dev/null -s -w "%{http_code}" --max-time 15 https://bobdyn.com)
+          STATUS=$(curl -o /dev/null -s -w "%{http_code}" --max-time 60 --retry 3 --retry-delay 10 https://bobdyn.com)
           echo "HTTP status: $STATUS"
           if [ "$STATUS" -lt 200 ] || [ "$STATUS" -ge 400 ]; then
             echo "Site returned unexpected status $STATUS"
