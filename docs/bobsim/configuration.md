@@ -5,35 +5,62 @@ title: Configuration
 
 # Configuration
 
-BobDyn/BobSim configuration is mostly plain YAML plus a small number of
-OpenModelica build scripts. Edit durable sources, then let the build targets
-produce generated artifacts.
+BobDyn/BobSim configuration is mostly plain YAML plus generated Modelica
+definitions and a small number of OpenModelica build scripts. The app is the
+normal editor for vehicle setup and runnable workflow options; the files remain
+plain enough to inspect and version deliberately.
 
-## Active Vehicle Source
+## Vehicle Source
 
-BobSim owns the active vehicle source at:
+The app manages vehicle setup as YAML, then writes the generated Modelica
+definition used by the standard workflows.
 
-```text
-vehicle.yml
-```
-
-BobLib's active generation input is:
+Common app vehicle paths:
 
 ```text
-_0_Utils/external/BobLib/Generation/vehicle.yml
+_5_App/vehicle_configs/
+_5_App/vehicle_workspaces/<vehicle>/config/vehicle.yml
 ```
 
-The standard build targets copy the repo-root `vehicle.yml` into that BobLib
-generation path before compiling:
+Use the `Setup` view to load, create, import, edit, save, and write the active
+vehicle. Use `Write to MBD` before opening `Simulation`; that is the step that
+updates the generated Modelica definition.
+
+![BobSim Setup view showing vehicle architecture inputs, Save Vehicle, Write to MBD, and Modelica stack status](/images/bobsim/app-setup-architecture.png)
+
+BobLib remains the physical model library and owns the standard entry-point
+templates. The standard build targets compile the selected Modelica entry
+points:
 
 ```bash
 make standard-build
 make standard-build-four-post
 ```
 
-When changing the vehicle, treat `vehicle.yml`, BobLib's templates, and the
-generator scripts as durable inputs. Generated Modelica files are active
-package artifacts.
+When changing the vehicle from the app, save the vehicle YAML and write it to
+MBD. When changing model structure directly, work in BobLib and keep BobSim
+workflow YAML focused on case definitions and runtime overrides.
+
+## App Configs
+
+The app exposes supported workflow fields in the browser and stores reusable
+run configs under:
+
+```text
+_5_App/sim_configs/
+```
+
+Default app configs live in:
+
+```text
+_5_App/sim_configs/_defaults/
+```
+
+The app can load a default config, save a named config, apply edits to the
+active run, and then launch the backing workflow. Advanced options that are not
+exposed in the form can still be edited in the underlying YAML.
+
+![BobSim simulation configuration modal with saved config controls and Apply Edits action](/images/bobsim/app-simulation-config.png)
 
 ## Standard Workflow Configs
 
@@ -68,7 +95,7 @@ Typical shape:
 simulation:
   backend: modelica
   build_dir: _3_StandardSim/Build/VehicleSim
-  exec_name: BobLib.Standards.VehicleSim
+  exec_name: BobLibVehicleInterfaces.Experiments.Standards.VehicleSim
 
   start_time: 0.0
   stop_time: 20.0
@@ -102,6 +129,15 @@ Useful keys:
 
 The current public StandardSim configs use `-jacobian=internalNumerical` for
 the OpenModelica runtime Jacobian path.
+
+## Compliance and Damping Studies
+
+Halfshaft compliance and damping are valid study parameters in the integrated
+powertrain model. Increasing compliance detail can add faster torsional modes,
+so refine the simulation settings when studying these effects: reduce the
+default step size or output interval, keep the adaptive solver tolerance tight
+enough for the target dynamics, and confirm the solver is actually resolving
+the halfshaft transient instead of stepping across it.
 
 ## Initial Parameters
 
@@ -274,14 +310,14 @@ make opt-refined
 
 To change the active vehicle:
 
-1. Edit `vehicle.yml`.
+1. Edit the relevant BobLib Modelica record or subsystem redeclare.
 2. Run `make standard-build` or `make standard-build-four-post`.
 3. Rerun the relevant study.
 
 To change a standard study:
 
 1. Edit that workflow's config YAML.
-2. Rebuild only if the Modelica source or generated vehicle changed.
+2. Rebuild only if the Modelica source or selected vehicle record changed.
 3. Run the workflow target.
 4. Inspect the report and metrics CSV.
 
