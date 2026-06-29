@@ -146,8 +146,9 @@ Each successful Simulation workflow creates a local run package. Download:
 - `signals.zip`, organized by run
 - `run-description.json`
 
-The PDF includes the configured plots and raw time-series plots for retained
-runs. Saved app archive packages live under:
+The PDF includes the configured report pages. FourPostEval omits raw
+time-series appendix pages by default, and the retained per-run data lives in
+`signals.zip`. Saved app archive packages live under:
 
 ```text
 _5_App/saved_results/
@@ -158,6 +159,9 @@ Vehicle-specific app workspaces live under:
 ```text
 _5_App/vehicle_workspaces/
 ```
+
+Use `Delete` in Archive to remove a local run from both the saved archive and
+the vehicle workspace mirror.
 
 Standard app-registered outputs are under:
 

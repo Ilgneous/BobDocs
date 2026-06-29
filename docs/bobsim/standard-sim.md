@@ -247,14 +247,19 @@ Current config highlights:
 | `simulation.build_dir` | `_3_StandardSim/BuildBobLib/FourPostSim` |
 | `simulation.extra_args` | includes `-jacobian=internalNumerical` |
 | `procedure.heaveMagnitude` | `0.03` m |
-| `procedure.rollMagnitude` | `0.035` rad |
+| `procedure.rollMagnitude` | `0.02181661564992912` rad |
 | `procedure.forceMagnitude` | `1000` N |
 | `report.metrics_csv_path` | `_3_StandardSim/results/four_post_eval_report_metrics.csv` |
+| `report.raw_time_series_appendix` | `false` by default for focused K&C reports |
 
 The workflow extracts front and rear K&C output records and computes summary
 metrics for camber, toe, caster, KPI, mechanical trail, mechanical scrub,
 motion ratio, anti/jacking behavior, roll stiffness, anti-roll-bar
 contribution, and lateral load transfer distribution.
+
+The Geometric Anti-Roll vs Roll report page plots the measured front and rear
+lateral jacking anti-roll curves across the roll sweep. Raw per-run signal data
+is still retained in Archive packages when the app saves a run.
 
 Main outputs:
 

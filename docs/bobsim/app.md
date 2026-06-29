@@ -53,6 +53,11 @@ Default runtime roots:
 Set `BOBSIM_HOME` to choose a different runtime root. `BOBDYN_HOME` is still
 honored for compatibility with earlier local builds.
 
+On launch, the desktop app refreshes app-owned runtime resources from the
+bundle, including BobLib resources, report helpers, build scripts, and default
+run configs. User-owned files such as saved vehicles, active workspaces, saved
+results, saved configs, and imported templates are preserved.
+
 ## What The App Owns
 
 The app wraps the existing BobSim workflow code. It does not replace the CLI
@@ -183,10 +188,14 @@ package for that vehicle/workflow. Each package includes:
 - a run description manifest
 - vehicle and run-config snapshots
 
-The report includes the configured summary/plot pages plus raw time-series
-appendix pages for each retained run. The signal archive contains per-run
-`signals.csv`, `overrides.txt`, `run.log`, and `description.json` files when
-those run artifacts are available.
+The report includes the configured summary/plot pages. FourPostEval omits the
+raw time-series appendix by default so the K&C report stays focused; workflows
+can still opt into raw appendix pages through their report config. The signal
+archive contains per-run `signals.csv`, `overrides.txt`, `run.log`, and
+`description.json` files when those run artifacts are available.
+
+Archive cards include `Delete` for removing local runs. Deleting an archive
+removes both the global saved package and the mirrored vehicle workspace copy.
 
 ## Local App Paths
 
@@ -248,7 +257,7 @@ Open Simulation's OpenModelica toolchain selector and choose the `omc`
 executable plus the library directory. If you are using the source checkout,
 scripted CLI workflows can also run from the Docker environment.
 
-No output appears in `Review`
+No output appears in `Archive`
 
 Open `Run Log` first. A failed build or simulation usually leaves the useful
 message there. Also check that the workflow's report and metrics output paths

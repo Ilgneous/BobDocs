@@ -57,6 +57,13 @@ Vehicle-scoped app workspaces live under:
 _5_App/vehicle_workspaces/
 ```
 
+Use `Delete` from an Archive card or selected run detail to remove a local run.
+BobSim removes both the global package and the vehicle-workspace mirror.
+
+FourPostEval reports omit raw time-series appendix pages by default. Use
+`signals.zip` when you need the retained per-run signal tables, overrides, logs,
+and descriptions.
+
 ## StandardSim Results
 
 StandardSim app-registered outputs live under:

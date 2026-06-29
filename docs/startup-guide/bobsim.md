@@ -211,7 +211,7 @@ For a first proof run:
 4. Click `Apply Edits` if you changed anything.
 5. Click `Build + Run`.
 6. Open `Run Log` while the job is running.
-7. Click `Review` when outputs exist.
+7. Click `Review` when outputs exist, or open `Archive`.
 
 ![BobSim Ramp Steer simulation configuration modal with Build and Run action, config controls, and run log tab](/images/bobsim/app-simulation-config.png)
 
@@ -243,9 +243,13 @@ download:
 - a `signals.zip` archive organized by run
 - a run description manifest
 
-The PDF report includes the configured report pages plus raw time-series plots
-for every retained run. The signal archive stores per-run `signals.csv`,
-`overrides.txt`, `run.log`, and `description.json` files when available.
+The PDF report includes the configured report pages. FourPostEval omits raw
+time-series appendix pages by default so the K&C report stays focused. The
+signal archive stores per-run `signals.csv`, `overrides.txt`, `run.log`, and
+`description.json` files when available.
+
+Use `Delete` in Archive when a local run package should be removed from both
+the global archive and the vehicle workspace.
 
 Archive packages are copied under:
 
