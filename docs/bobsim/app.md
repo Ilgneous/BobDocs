@@ -135,6 +135,13 @@ dependency, or simulation failures.
 
 ![BobSim Ramp Steer configuration modal with run setup fields and Build and Run action](/images/bobsim/app-simulation-config.png)
 
+The Ramp Steer config exposes the nonlinear steering-gain-loss cutoff used to
+stop open-loop ramps before the response becomes strongly nonlinear. The Steady
+State config exposes velocity-specific lateral-acceleration caps and the main
+closed-loop settle tolerances. The default caps are intentionally conservative
+for alpha releases so the public run grid completes cleanly; users can raise or
+remove caps for exploratory runs.
+
 ## OpenModelica Toolchain
 
 Simulation is available after BobSim verifies an OpenModelica toolchain. The

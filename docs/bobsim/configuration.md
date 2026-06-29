@@ -67,6 +67,7 @@ exposed in the form can still be edited in the underlying YAML.
 The main standard configs are:
 
 ```text
+_3_StandardSim/RampSteerEval/ramp_steer_eval_config.yml
 _3_StandardSim/SteadyStateEval/steady_state_eval_config.yml
 _3_StandardSim/TransientEval/transient_eval_config.yml
 _3_StandardSim/FourPostEval/four_post_eval_config.yml
@@ -145,8 +146,9 @@ the halfshaft transient instead of stepping across it.
 ## Initial Parameters
 
 Some workflows define common Modelica overrides under
-`simulation.init_parameters`. SteadyStateEval uses this for the maneuver mode,
-steer timing, ramp behavior, termination logic, and velocity controller gains.
+`simulation.init_parameters`. RampSteerEval uses this for handwheel ramp
+timing and termination logic. SteadyStateEval uses it for closed-loop target
+tracking, settle detection, termination logic, and velocity controller gains.
 
 Example:
 
@@ -157,12 +159,33 @@ simulation:
     steerStart: 2.0
     handwheelRampRate: 0.14
     enableLinearityTermination: true
+    linearityNonlinearityFraction: 0.20
+    linearityReferenceAy: 4.0
     velGain: 100.0
     velTi: 2.0
 ```
 
 Case-specific overrides are layered on top by the workflow before the runner
 writes `overrides.txt`.
+
+Steady-state configs use `useMode: 3` and generate target lateral-acceleration
+cases from `sweep.targetAys`. The optional `sweep.maxAyByVelocity` map clips
+that target grid per velocity before cases are built:
+
+```yaml
+sweep:
+  testVels: [12.5, 15.0, 17.5, 20.0]
+  targetAys: [2.0, 3.0, 4.0, 6.0, 8.0, 10.0, 12.0, 14.0, 16.0, 18.0]
+  maxAyByVelocity:
+    12.5: 16.0
+    15.0: 10.0
+    17.5: 6.0
+    20.0: 4.0
+```
+
+Leave caps in place for release-style runs that should complete cleanly across
+the default vehicle. Remove or raise them when intentionally probing the edge
+of the closed-loop solver envelope.
 
 ## Execution Section
 

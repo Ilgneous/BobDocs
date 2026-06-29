@@ -122,6 +122,24 @@ configured velocity cases, applies a handwheel ramp, records the vehicle
 response, and writes report metrics from the measured lateral-acceleration
 path.
 
+Current config highlights:
+
+| Key | Current role |
+| :-- | :-- |
+| `simulation.exec_name` | `BobLib.Experiments.Standards.VehicleSim` |
+| `simulation.build_dir` | `_3_StandardSim/BuildBobLib/VehicleSim` |
+| `simulation.init_parameters.useMode` | `0`, open-loop ramp steer |
+| `simulation.init_parameters.enableLinearityTermination` | enables the steering-gain-loss ramp cutoff |
+| `simulation.init_parameters.linearityNonlinearityFraction` | local lateral-gain loss fraction that stops the ramp |
+| `simulation.init_parameters.linearityReferenceAy` | reference measured lateral acceleration before cutoff evaluation |
+| `sweep.testVels` | velocity isolines |
+| `sweep.maxAy` | positive ramp target used to choose the ramp direction and report range |
+| `fit.ay_linear_max` | linear fit band upper bound |
+
+The app exposes the nonlinearity cutoff controls in the Ramp Steer run config
+modal. If higher-speed ramp-steer runs stop before the desired lateral
+acceleration, increase the cutoff fraction or disable the cutoff for that run.
+
 Main outputs:
 
 ```text
@@ -140,12 +158,30 @@ Current config highlights:
 | :-- | :-- |
 | `simulation.exec_name` | `BobLib.Experiments.Standards.VehicleSim` |
 | `simulation.build_dir` | `_3_StandardSim/BuildBobLib/VehicleSim` |
-| `simulation.init_parameters.useMode` | `0`, open-loop ramp steer |
+| `simulation.init_parameters.useMode` | `3`, closed-loop target lateral acceleration |
+| `simulation.init_parameters.steadyStateSettleTimeout` | timeout after the target ramp reaches its final value |
+| `simulation.init_parameters.steadyStateAyTolerance` | settled lateral-acceleration tracking tolerance |
+| `simulation.init_parameters.steadyStateSpeedTolerance` | settled speed tracking tolerance |
 | `simulation.extra_args` | includes `-jacobian=internalNumerical` |
 | `sweep.testVels` | `12.5`, `15.0`, `17.5`, `20.0` m/s |
-| `sweep.maxAy` | positive ramp target up to `18.0` m/s^2 |
+| `sweep.targetAys` | available target grid up to `18.0` m/s^2 |
+| `sweep.maxAyByVelocity` | default per-velocity caps for feasible alpha runs |
 | `fit.ay_linear_max` | linear fit band upper bound |
 | `report.metric_target_velocity_mps` | velocity used for exported summary metrics |
+
+The default target list stays broad, but the default app and workflow configs
+cap generated steady-state cases by velocity:
+
+| Velocity | Default max target |
+| :-- | :-- |
+| `12.5` m/s | `16.0` m/s^2 |
+| `15.0` m/s | `10.0` m/s^2 |
+| `17.5` m/s | `6.0` m/s^2 |
+| `20.0` m/s | `4.0` m/s^2 |
+
+Remove or raise a cap when intentionally exploring higher lateral acceleration
+targets. The app exposes these caps and the closed-loop settle tolerances in
+the Steady State run config modal.
 
 The workflow extracts steering, acceleration, roll, sideslip, yaw velocity,
 wheel loads, handwheel torque, and controller/debug signals. It fits response
