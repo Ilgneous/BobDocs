@@ -17,7 +17,7 @@ by layer.
 | Guide | Use it when | You will mostly touch |
 | :-- | :-- | :-- |
 | [BobDyn/BobLib Use Guide](/use-guide/boblib) | You are editing, checking, or simulating the Modelica vehicle library directly | Modelica packages, records, OMEdit diagrams, direct OpenModelica workflows |
-| [BobDyn/BobSim Use Guide](/use-guide/bobsim) | You are running vehicle studies and collecting outputs | BobSim app Setup, Simulation, Results, workflow YAML, reports, metrics |
+| [BobDyn/BobSim Use Guide](/use-guide/bobsim) | You are running vehicle studies and collecting outputs | BobSim app Setup, Simulation, Analysis, workflow YAML, reports, metrics |
 
 ## Rule Of Thumb
 

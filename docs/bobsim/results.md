@@ -1,42 +1,54 @@
 ---
 layout: doc
-title: Results
+title: Analysis
 ---
 
-# Results
+# Analysis
 
 BobDyn/BobSim writes results in predictable workflow-specific directories. The
-public artifacts are reports, metrics CSVs, plots, animations, and sensitivity
-tables. Debug artifacts are per-case run directories, OpenModelica logs,
-override files, generated result CSVs, and compiled build artifacts.
+public alpha path is the app's `Analysis` view: review the generated PDF,
+download metrics, and download the per-run signal archive. Debug artifacts are
+per-case run directories, OpenModelica logs, override files, generated result
+CSVs, and compiled build artifacts.
 
-The app-facing path is `Results`: explore result CSVs, preview registered
-outputs, and save named result snapshots with the active vehicle and run config.
+In-app plotting and ad-hoc processing are intentionally gated off for the alpha.
+Users run simulations and review the PDF, metrics CSV, and raw signal bundle.
 
-## App Results
+## App Analysis
 
-Use the app's `Results` view after a simulation run.
+Use the app's `Analysis` view after a simulation run, or click `Review` on a
+Simulation card when outputs exist.
 
-![BobSim Results view with result source browser, Explore tab, signal controls, and plot pane](/images/bobsim/app-results-explore.png)
+![BobSim Analysis view with review packages, downloadable files, and PDF preview](/images/bobsim/app-results-explore.png)
 
-| Tab | Use it for |
-| :-- | :-- |
-| `Explore` | Plot discovered CSV signals with selectable x-axis and signal filters |
-| `Saved` | Review named result snapshots saved from the app |
-| `Processing` | Track lightweight processing definitions around result CSVs |
+After a Simulation job succeeds, BobSim creates a review package automatically.
+Each package can include:
 
-Named app snapshots are written under:
+- `report.pdf`
+- `metrics.csv`
+- `signals.zip`
+- `run-description.json`
+- the active vehicle YAML
+- the active run config YAML
+- `manifest.json`
+
+The `signals.zip` archive is organized by run:
+
+```text
+manifest.json
+runs/
+  001-case-name/
+    signals.csv
+    overrides.txt
+    run.log
+    description.json
+```
+
+Saved app review packages are written under:
 
 ```text
 _5_App/saved_results/
 ```
-
-Each saved snapshot can include:
-
-- `manifest.json`
-- the active vehicle YAML
-- the active run config YAML
-- copied report and metrics files
 
 Vehicle-scoped app workspaces live under:
 

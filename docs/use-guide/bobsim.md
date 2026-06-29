@@ -52,7 +52,7 @@ The normal BobSim loop is:
 4. Click `Write to MBD`.
 5. Verify the OpenModelica toolchain if Simulation asks for it.
 6. Open `Simulation`, choose a workflow, configure it, then `Build + Run`.
-7. Open `Results` to review, plot, and save the active outputs.
+7. Open `Analysis` to review the generated PDF, metrics, and signal archive.
 
 The app keeps the public workflow visible: vehicle setup on the left rail,
 simulation launch in the middle, and result review after the run.
@@ -133,20 +133,21 @@ OpenModelica library directory when needed. The usual user library directories
 are `%APPDATA%\.openmodelica\libraries` on Windows and
 `~/.openmodelica/libraries` on macOS/Linux.
 
-## Results View
+## Analysis View
 
-Use `Results` after a run.
+Use `Analysis` after a run, or click `Review` from the Simulation workflow card.
 
-![BobSim Results view with result source list, Explore tab, signal controls, and plot area](/images/bobsim/app-results-explore.png)
+![BobSim Analysis view with review packages, downloadable files, and PDF preview](/images/bobsim/app-results-explore.png)
 
-| Tab | Use it for |
-| :-- | :-- |
-| `Explore` | Plot numeric columns from discovered result CSVs |
-| `Saved` | Inspect named result snapshots |
-| `Processing` | Track lightweight processing definitions around result CSVs |
+Each successful Simulation workflow creates a review package. Download:
 
-Click `Save Active Results` to preserve the current workflow outputs with the
-active vehicle and config snapshot. Saved app snapshots live under:
+- the generated PDF report
+- the metrics CSV
+- `signals.zip`, organized by run
+- `run-description.json`
+
+The PDF includes the configured plots and raw time-series plots for retained
+runs. Saved app review packages live under:
 
 ```text
 _5_App/saved_results/
@@ -293,9 +294,9 @@ extraction, so disable cleanup before investigating raw artifacts.
 
 ## Related Pages
 
-- [BobSim App](/bobsim/app) for a tour of Setup, Simulation, and Results
+- [BobSim App](/bobsim/app) for a tour of Setup, Simulation, and Analysis
 - [BobDyn/BobSim overview](/bobsim/) for repository structure and target language
 - [StandardSim](/bobsim/standard-sim) for the standard high-fidelity evaluations
 - [Configuration](/bobsim/configuration) for YAML sections and build settings
-- [Results](/bobsim/results) for artifact locations and preservation practices
+- [Analysis](/bobsim/results) for artifact locations and preservation practices
 - [BobDyn/BobLib use guide](/use-guide/boblib) for Modelica model structure and regression checks

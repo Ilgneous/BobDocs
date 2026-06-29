@@ -63,8 +63,8 @@ targets; it gives the normal setup and run path a guided browser surface.
 | Vehicle setup | Load, create, import, edit, preview, save, and write vehicle definitions |
 | Modelica stack status | Show BobLib, generated vehicle definition, `VehicleSim`, and `FourPostSim` readiness |
 | Simulation launch | Configure workflows, apply edits, build, run, and stream job logs |
-| Result review | Preview registered outputs, explore CSV signals, save result snapshots |
-| Local libraries | Manage saved vehicles, saved run configs, saved results, and vehicle workspaces |
+| Result review | Preview registered outputs and download review packages |
+| Local libraries | Manage saved vehicles, saved run configs, review packages, and vehicle workspaces |
 
 ## Setup
 
@@ -160,21 +160,26 @@ Common library defaults:
 The selector verifies `omc --version` and checks that required libraries are
 present before Simulation unlocks.
 
-## Results
+## Analysis
 
-`Results` collects generated artifacts and saved snapshots.
+`Analysis` is the alpha review surface for completed Simulation runs. It is
+focused on downloadable artifacts instead of in-app plotting.
 
-![BobSim Results view with saved sources, Explore tab, signal controls, and Save Active Results action](/images/bobsim/app-results-explore.png)
+![BobSim Analysis view with review packages, downloadable files, and PDF preview](/images/bobsim/app-results-explore.png)
 
-| Tab | Use |
-| :-- | :-- |
-| `Explore` | Select discovered CSVs, choose an x-axis, filter signals, and plot channels |
-| `Saved` | Inspect named app result snapshots |
-| `Processing` | Record lightweight processing definitions around source CSVs |
+After a Simulation job succeeds, BobSim automatically creates a review package
+for the active vehicle/workflow. Each package includes:
 
-Click `Save Active Results` after a run to preserve the active workflow output
-bundle. The saved bundle includes the available report and metrics files plus
-vehicle/config snapshots and a manifest.
+- the generated PDF report
+- the metrics CSV
+- a signal archive zip organized by run
+- a run description manifest
+- vehicle and run-config snapshots
+
+The report includes the configured summary/plot pages plus raw time-series
+appendix pages for each retained run. The signal archive contains per-run
+`signals.csv`, `overrides.txt`, `run.log`, and `description.json` files when
+those run artifacts are available.
 
 ## Local App Paths
 
@@ -185,11 +190,11 @@ vehicle/config snapshots and a manifest.
 | `_5_App/vehicle_configs/` | Saved app vehicle YAML files |
 | `_5_App/sim_configs/` | Default and saved app run configs |
 | `_5_App/vehicle_workspaces/` | Per-vehicle generated config and result workspaces |
-| `_5_App/saved_results/` | Named result snapshots saved from the app |
+| `_5_App/saved_results/` | Review packages saved from the app |
 | `_3_StandardSim/generated_results/` | Standard outputs registered by the app |
 
-The app also discovers CSVs under standard BobSim result and build directories
-so older CLI outputs can still be explored from the Results view.
+Older CLI outputs remain available on disk, but the alpha app UI focuses on
+review packages instead of the full CSV explorer.
 
 ## CLI Compatibility
 
@@ -206,7 +211,7 @@ make standard-eval-four-post
 Use the app when you want the guided path:
 
 ```text
-Setup -> Save Vehicle -> Write to MBD -> Simulation -> Results
+Setup -> Save Vehicle -> Write to MBD -> Simulation -> Analysis
 ```
 
 ## Troubleshooting

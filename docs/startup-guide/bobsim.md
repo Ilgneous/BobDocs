@@ -228,22 +228,26 @@ The app registers standard reports and metric CSVs under
 `_3_StandardSim/generated_results/`. Some CLI configs and older checkouts may
 write comparable public artifacts under `_3_StandardSim/results/`.
 
-## Step 7: Inspect And Save Results
+## Step 7: Review Analysis Outputs
 
-Open the `Results` view after a run.
+Open the `Analysis` view after a run, or click `Review` from the Simulation
+workflow card.
 
-![BobSim Results view with saved result sources, Explore tab, signal controls, and Save Active Results action](/images/bobsim/app-results-explore.png)
+![BobSim Analysis view with review packages, downloadable files, and PDF preview](/images/bobsim/app-results-explore.png)
 
-Use:
+Each successful Simulation workflow creates a review package for the active
+vehicle. Use it to download:
 
-| Tab | Use it for |
-| :-- | :-- |
-| `Explore` | Pick result CSVs, choose an x-axis, filter signals, and plot selected channels |
-| `Saved` | Review named result snapshots saved from the active vehicle/workflow |
-| `Processing` | Define lightweight processing records around source CSVs |
+- the generated PDF report
+- the metrics CSV
+- a `signals.zip` archive organized by run
+- a run description manifest
 
-To preserve an app run, enter a name and click `Save Active Results`. The app
-copies the report, metrics, vehicle snapshot, run config, and manifest under:
+The PDF report includes the configured report pages plus raw time-series plots
+for every retained run. The signal archive stores per-run `signals.csv`,
+`overrides.txt`, `run.log`, and `description.json` files when available.
+
+Review packages are copied under:
 
 ```text
 _5_App/saved_results/
@@ -349,7 +353,7 @@ the retained run directory and job log.
 
 ## Next Pages
 
-- [BobSim App](/bobsim/app) for a tour of Setup, Simulation, and Results
+- [BobSim App](/bobsim/app) for a tour of Setup, Simulation, and Analysis
 - [BobSim Use Guide](/use-guide/bobsim) for the normal workflow after setup
 - [BobDyn/BobSim overview](/bobsim/) for the repo map and CLI target language
 - [StandardSim](/bobsim/standard-sim) for the high-fidelity evaluation details

@@ -35,7 +35,7 @@ The app path is:
 2. Save the vehicle.
 3. Click `Write to MBD` to generate the Modelica vehicle definition.
 4. Open `Simulation`, configure a workflow, then build and run it.
-5. Open `Results` to inspect, plot, and save the outputs.
+5. Open `Analysis` to download the PDF report, metrics, and per-run signal archive.
 
 The CLI path is the same workflow as commands: build the relevant standard
 model, run a standard/envelope/sensitivity workflow from YAML configs, then
@@ -52,7 +52,7 @@ extraction, plotting, and reporting.
 flowchart TB
     records["BobLib model library<br/>generated vehicle definitions"]
     entry["BobLib standard entry point<br/>VehicleSim / FourPostSim"]
-    app["BobSim app<br/>Setup / Simulation / Results"]
+    app["BobSim app<br/>Setup / Simulation / Analysis"]
     executable["OpenModelica<br/>executable"]
     workflow["BobSim workflow YAML<br/>cases and runtime overrides"]
     outputs["BobSim outputs<br/>reports, metrics, plots, sensitivities"]
@@ -116,7 +116,7 @@ http://127.0.0.1:8765
 Use the app path first:
 
 ```text
-Setup -> Save Vehicle -> Write to MBD -> Simulation -> Results
+Setup -> Save Vehicle -> Write to MBD -> Simulation -> Analysis
 ```
 
 ![BobSim app Setup view with guided steps, vehicle controls, and architecture preview](/images/bobsim/app-setup-architecture.png)
@@ -160,10 +160,10 @@ Run `make help` for the exact target list in the current checkout.
 
 | Page | Use it for |
 | :-- | :-- |
-| [App](/bobsim/app) | Setup, Simulation, Results, saved vehicles, saved configs, and saved result snapshots |
+| [App](/bobsim/app) | Setup, Simulation, Analysis, saved vehicles, saved configs, and review packages |
 | [Configuration](/bobsim/configuration) | Workflow YAML, runtime flags, report and plot config |
 | [StandardSim](/bobsim/standard-sim) | RampSteerEval, SteadyStateEval, TransientEval, FourPostEval, runners, reports |
-| [Results](/bobsim/results) | Output paths, metrics CSVs, raw case artifacts, preservation |
+| [Analysis](/bobsim/results) | Review packages, metrics CSVs, raw case artifacts, preservation |
 | [EnvelopeSim](/bobsim/envelope) | Optional GGV and YMD envelope calculations |
 | [OptSim](/bobsim/doe) | Standard sensitivities, envelope sensitivities, refined response surfaces |
 | [Development](/bobsim/development) | Docker, local Python, make targets, quality checks, troubleshooting |
@@ -182,7 +182,7 @@ For a first user workflow, launch the downloaded `BobSim` executable or run
 Then run through:
 
 ```text
-Setup -> Save Vehicle -> Write to MBD -> Simulation -> Results
+Setup -> Save Vehicle -> Write to MBD -> Simulation -> Analysis
 ```
 
 ![BobSim app Simulation catalog with standard workflow cards](/images/bobsim/app-simulation-catalog.png)
