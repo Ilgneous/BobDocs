@@ -259,7 +259,7 @@ For normal browser-based work:
 make app
 ```
 
-Then use `Setup`, `Simulation`, and `Analysis`.
+Then use `Setup`, `Simulation`, and `Archive`.
 
 ![BobSim app Simulation catalog used for normal browser-based workflow runs](/images/bobsim/app-simulation-catalog.png)
 

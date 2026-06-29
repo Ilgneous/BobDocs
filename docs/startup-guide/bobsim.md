@@ -228,15 +228,15 @@ The app registers standard reports and metric CSVs under
 `_3_StandardSim/generated_results/`. Some CLI configs and older checkouts may
 write comparable public artifacts under `_3_StandardSim/results/`.
 
-## Step 7: Review Analysis Outputs
+## Step 7: Review Archived Outputs
 
-Open the `Analysis` view after a run, or click `Review` from the Simulation
+Open the `Archive` view after a run, or click `Review` from the Simulation
 workflow card.
 
-![BobSim Analysis view with review packages, downloadable files, and PDF preview](/images/bobsim/app-results-explore.png)
+![BobSim Archive view with local runs, downloadable files, and PDF preview](/images/bobsim/app-results-explore.png)
 
-Each successful Simulation workflow creates a review package for the active
-vehicle. Use it to download:
+Each successful Simulation workflow creates a local archive package. Use it to
+download:
 
 - the generated PDF report
 - the metrics CSV
@@ -247,7 +247,7 @@ The PDF report includes the configured report pages plus raw time-series plots
 for every retained run. The signal archive stores per-run `signals.csv`,
 `overrides.txt`, `run.log`, and `description.json` files when available.
 
-Review packages are copied under:
+Archive packages are copied under:
 
 ```text
 _5_App/saved_results/
@@ -353,7 +353,7 @@ the retained run directory and job log.
 
 ## Next Pages
 
-- [BobSim App](/bobsim/app) for a tour of Setup, Simulation, and Analysis
+- [BobSim App](/bobsim/app) for a tour of Setup, Simulation, and Archive
 - [BobSim Use Guide](/use-guide/bobsim) for the normal workflow after setup
 - [BobDyn/BobSim overview](/bobsim/) for the repo map and CLI target language
 - [StandardSim](/bobsim/standard-sim) for the high-fidelity evaluation details

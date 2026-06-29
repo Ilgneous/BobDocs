@@ -63,8 +63,8 @@ targets; it gives the normal setup and run path a guided browser surface.
 | Vehicle setup | Load, create, import, edit, preview, save, and write vehicle definitions |
 | Modelica stack status | Show BobLib, generated vehicle definition, `VehicleSim`, and `FourPostSim` readiness |
 | Simulation launch | Configure workflows, apply edits, build, run, and stream job logs |
-| Result review | Preview registered outputs and download review packages |
-| Local libraries | Manage saved vehicles, saved run configs, review packages, and vehicle workspaces |
+| Result review | Preview registered outputs and download archived run packages |
+| Local libraries | Manage saved vehicles, saved run configs, local run archives, and vehicle workspaces |
 
 ## Setup
 
@@ -160,15 +160,15 @@ Common library defaults:
 The selector verifies `omc --version` and checks that required libraries are
 present before Simulation unlocks.
 
-## Analysis
+## Archive
 
-`Analysis` is the alpha review surface for completed Simulation runs. It is
-focused on downloadable artifacts instead of in-app plotting.
+`Archive` is the local history of completed Simulation runs. It is focused on
+downloadable artifacts instead of in-app plotting.
 
-![BobSim Analysis view with review packages, downloadable files, and PDF preview](/images/bobsim/app-results-explore.png)
+![BobSim Archive view with local runs, downloadable files, and PDF preview](/images/bobsim/app-results-explore.png)
 
-After a Simulation job succeeds, BobSim automatically creates a review package
-for the active vehicle/workflow. Each package includes:
+After a Simulation job succeeds, BobSim automatically creates a local archive
+package for that vehicle/workflow. Each package includes:
 
 - the generated PDF report
 - the metrics CSV
@@ -190,11 +190,11 @@ those run artifacts are available.
 | `_5_App/vehicle_configs/` | Saved app vehicle YAML files |
 | `_5_App/sim_configs/` | Default and saved app run configs |
 | `_5_App/vehicle_workspaces/` | Per-vehicle generated config and result workspaces |
-| `_5_App/saved_results/` | Review packages saved from the app |
+| `_5_App/saved_results/` | Local archive packages saved from the app |
 | `_3_StandardSim/generated_results/` | Standard outputs registered by the app |
 
 Older CLI outputs remain available on disk, but the alpha app UI focuses on
-review packages instead of the full CSV explorer.
+local archive packages instead of the full CSV explorer.
 
 ## CLI Compatibility
 
@@ -211,7 +211,7 @@ make standard-eval-four-post
 Use the app when you want the guided path:
 
 ```text
-Setup -> Save Vehicle -> Write to MBD -> Simulation -> Analysis
+Setup -> Save Vehicle -> Write to MBD -> Simulation -> Archive
 ```
 
 ## Troubleshooting

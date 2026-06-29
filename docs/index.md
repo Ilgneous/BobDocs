@@ -217,7 +217,7 @@ make app
 Then open `http://127.0.0.1:8765` and follow:
 
 ```text
-Setup -> Save Vehicle -> Write to MBD -> Simulation -> Analysis
+Setup -> Save Vehicle -> Write to MBD -> Simulation -> Archive
 ```
 
 ![BobSim app showing the guided Setup view with vehicle architecture controls and preview](/images/bobsim/app-setup-architecture.png)

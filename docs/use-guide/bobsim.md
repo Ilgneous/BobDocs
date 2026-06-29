@@ -52,7 +52,7 @@ The normal BobSim loop is:
 4. Click `Write to MBD`.
 5. Verify the OpenModelica toolchain if Simulation asks for it.
 6. Open `Simulation`, choose a workflow, configure it, then `Build + Run`.
-7. Open `Analysis` to review the generated PDF, metrics, and signal archive.
+7. Open `Archive` to review the generated PDF, metrics, and signal archive.
 
 The app keeps the public workflow visible: vehicle setup on the left rail,
 simulation launch in the middle, and result review after the run.
@@ -133,13 +133,13 @@ OpenModelica library directory when needed. The usual user library directories
 are `%APPDATA%\.openmodelica\libraries` on Windows and
 `~/.openmodelica/libraries` on macOS/Linux.
 
-## Analysis View
+## Archive View
 
-Use `Analysis` after a run, or click `Review` from the Simulation workflow card.
+Use `Archive` after a run, or click `Review` from the Simulation workflow card.
 
-![BobSim Analysis view with review packages, downloadable files, and PDF preview](/images/bobsim/app-results-explore.png)
+![BobSim Archive view with local runs, downloadable files, and PDF preview](/images/bobsim/app-results-explore.png)
 
-Each successful Simulation workflow creates a review package. Download:
+Each successful Simulation workflow creates a local run package. Download:
 
 - the generated PDF report
 - the metrics CSV
@@ -147,7 +147,7 @@ Each successful Simulation workflow creates a review package. Download:
 - `run-description.json`
 
 The PDF includes the configured plots and raw time-series plots for retained
-runs. Saved app review packages live under:
+runs. Saved app archive packages live under:
 
 ```text
 _5_App/saved_results/
@@ -294,9 +294,9 @@ extraction, so disable cleanup before investigating raw artifacts.
 
 ## Related Pages
 
-- [BobSim App](/bobsim/app) for a tour of Setup, Simulation, and Analysis
+- [BobSim App](/bobsim/app) for a tour of Setup, Simulation, and Archive
 - [BobDyn/BobSim overview](/bobsim/) for repository structure and target language
 - [StandardSim](/bobsim/standard-sim) for the standard high-fidelity evaluations
 - [Configuration](/bobsim/configuration) for YAML sections and build settings
-- [Analysis](/bobsim/results) for artifact locations and preservation practices
+- [Archive](/bobsim/results) for artifact locations and preservation practices
 - [BobDyn/BobLib use guide](/use-guide/boblib) for Modelica model structure and regression checks
