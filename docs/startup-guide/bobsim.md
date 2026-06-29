@@ -64,7 +64,6 @@ and results somewhere else.
 
 For development or scripted CLI work, clone with submodules:
 
-
 ```bash
 git clone --recurse-submodules https://github.com/BobDyn/BobSim.git
 cd BobSim
