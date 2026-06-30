@@ -13,8 +13,8 @@ There are two normal launch paths.
 For the released desktop app, download the BobSim asset for your operating
 system from the [GitHub Release](https://github.com/BobDyn/BobSim/releases/latest),
 extract it, and run `BobSim`. The desktop app bundles the Python backend and
-browser frontend. It does not bundle
-OpenModelica or prebuilt simulation executables; those are selected and built
+frontend in an embedded desktop window. It does not bundle OpenModelica or
+prebuilt simulation executables; those are selected and built
 locally on the user's machine.
 
 For a source checkout, start it from the BobSim root:
@@ -158,8 +158,10 @@ Select:
 | Field | Use |
 | :-- | :-- |
 | `omc` executable | The OpenModelica compiler executable, or its `bin` directory |
-| OpenModelica home | Optional install root; often inferred from `omc` |
 | Library directory | Directory containing packages such as `Modelica` and `VehicleInterfaces` |
+
+BobSim only requires a verified `omc` executable and an OpenModelica library
+directory. Linux system installs usually do not need an OpenModelica home path.
 
 Common library defaults:
 

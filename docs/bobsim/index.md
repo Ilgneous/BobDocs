@@ -91,7 +91,7 @@ For normal use, download the BobSim desktop asset for your operating system
 from the [GitHub Release](https://github.com/BobDyn/BobSim/releases/latest),
 extract it, and run `BobSim`.
 
-The desktop app bundles the Python backend and browser frontend. OpenModelica
+The desktop app bundles the Python backend and embedded frontend. OpenModelica
 and generated simulation executables stay local to the user's machine.
 
 For source-checkout development, launch the app with:

@@ -39,7 +39,7 @@ Install these first:
 - Git and Python 3 with `venv` and `pip` if you are running from source
 - Docker and Docker Compose if you want the reproducible CLI workflow
 
-The released desktop app bundles the Python backend and browser frontend. It
+The released desktop app bundles the Python backend and embedded frontend. It
 does not bundle OpenModelica or prebuilt simulation executables; those are
 selected and generated locally. The source checkout path runs the same app with
 your local Python environment.
